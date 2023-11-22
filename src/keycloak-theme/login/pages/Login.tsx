@@ -1,4 +1,5 @@
-import { useState, type FormEventHandler } from "react";
+import { useState , type FormEventHandler } from "react";
+import React, { useEffect } from 'react';
 import { clsx } from "keycloakify/tools/clsx";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -17,6 +18,7 @@ if (result.wasPresent) {
 }
 
 
+
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
@@ -30,6 +32,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const { msg, msgStr } = i18n;
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+    
 
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
         e.preventDefault();
@@ -44,6 +47,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
         formElement.submit();
     });
+    
+    useEffect(() => {
+        const inputs = document.querySelectorAll<HTMLInputElement>('#kc-form-login .kcInputClass');
+        if (inputs) {
+          inputs.forEach(input => {
+            input.setAttribute("placeholder", "Email");
+          });
+        }
+      }, []);
 
     return (
         <Template
@@ -176,7 +188,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     name="login"
                                     id="kc-login"
                                     type="submit"
-                                    value={msgStr("doLogIn")}
+                                    // value={msgStr("doLogIn")}
+                                    value="Login"
                                     disabled={isLoginButtonDisabled}
                                 />
                             </div> 
