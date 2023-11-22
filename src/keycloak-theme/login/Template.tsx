@@ -86,7 +86,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             </div>
                         </div>
                     )}
-                    <img src={logoWeo} alt="" style={{ width:70 , height:'auto' , objectFit:'scale-down' , margin:'auto' }} />
+                    <img src={logoWeo} alt="" style={{ width:165 , height:'auto' , objectFit:'scale-down' , margin:'auto' }} />
                     {!(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
                         displayRequiredFields ? (
                             <div className={getClassName("kcContentWrapperClass")}>
